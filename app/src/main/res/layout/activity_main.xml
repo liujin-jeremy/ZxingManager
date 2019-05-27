@@ -16,6 +16,7 @@
           android:text="解析二维码"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"/>
+
       <Button
           android:id="@+id/generateQRCode"
           android:layout_width="wrap_content"
@@ -25,5 +26,25 @@
           android:text="生成二维码"
           app:layout_constraintStart_toEndOf="@+id/simpleQRCode"
           app:layout_constraintTop_toTopOf="parent"/>
+
+      <Button
+          android:id="@+id/simplePdf417"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginStart="8dp"
+          android:text="解析PDF417码"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/simpleQRCode"/>
+
+      <Button
+          android:id="@+id/generatePdf417"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginStart="8dp"
+          android:text="生成PDF417码"
+          app:layout_constraintStart_toEndOf="@+id/simplePdf417"
+          app:layout_constraintTop_toBottomOf="@+id/generateQRCode"/>
 
 </android.support.constraint.ConstraintLayout>

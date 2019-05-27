@@ -11,6 +11,10 @@
           android:supportsRtl="true"
           android:theme="@style/AppTheme"
           tools:ignore="GoogleAppIndexingWarning">
+            <activity android:name=".GeneratePdf417Activity">
+            </activity>
+            <activity android:name=".SimplePdf417Activity">
+            </activity>
             <activity android:name=".GenerateQRCodeActivity">
             </activity>
             <activity android:name=".SimpleQRCodeActivity">

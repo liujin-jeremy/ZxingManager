@@ -10,6 +10,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
       private Button mSimpleQRCode;
       private Button mGenerateQRCode;
+      private Button mSimplePdf417;
+      private Button mGeneratePdf417;
 
       @Override
       protected void onCreate ( Bundle savedInstanceState ) {
@@ -21,10 +23,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
       private void initView ( ) {
 
-            mSimpleQRCode = (Button) findViewById( R.id.simpleQRCode );
+            mSimpleQRCode = findViewById( R.id.simpleQRCode );
             mSimpleQRCode.setOnClickListener( this );
-            mGenerateQRCode = (Button) findViewById( R.id.generateQRCode );
+            mGenerateQRCode = findViewById( R.id.generateQRCode );
             mGenerateQRCode.setOnClickListener( this );
+            mSimplePdf417 = findViewById( R.id.simplePdf417 );
+            mSimplePdf417.setOnClickListener( this );
+            mGeneratePdf417 = (Button) findViewById( R.id.generatePdf417 );
+            mGeneratePdf417.setOnClickListener( this );
       }
 
       @Override
@@ -36,6 +42,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         break;
                   case R.id.generateQRCode:
                         GenerateQRCodeActivity.start( this );
+                        break;
+                  case R.id.simplePdf417:
+                        SimplePdf417Activity.start( this );
+                        break;
+                  case R.id.generatePdf417:
+                        GeneratePdf417Activity.start( this );
                         break;
                   default:
                         break;

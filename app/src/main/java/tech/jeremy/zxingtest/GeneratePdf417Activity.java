@@ -14,18 +14,18 @@ import android.widget.TextView;
 import com.google.zxing.Result;
 import tech.jeremy.zxing.ZXingManager;
 
-public class GenerateQRCodeActivity extends AppCompatActivity implements OnClickListener {
+public class GeneratePdf417Activity extends AppCompatActivity implements OnClickListener {
 
       private EditText  mTextEdit;
       private Button    mGenerate;
       private ImageView mImageView;
       private Button    mDecode;
-      private Bitmap    mQrCode;
       private TextView  mTextView;
+      private Bitmap    mPdf417;
 
       public static void start ( Context context ) {
 
-            Intent starter = new Intent( context, GenerateQRCodeActivity.class );
+            Intent starter = new Intent( context, GeneratePdf417Activity.class );
             context.startActivity( starter );
       }
 
@@ -33,19 +33,19 @@ public class GenerateQRCodeActivity extends AppCompatActivity implements OnClick
       protected void onCreate ( Bundle savedInstanceState ) {
 
             super.onCreate( savedInstanceState );
-            setContentView( R.layout.activity_generate_qrcode );
+            setContentView( R.layout.activity_generate_pdf417 );
             initView();
       }
 
       private void initView ( ) {
 
-            mTextEdit = findViewById( R.id.edit_text );
-            mGenerate = findViewById( R.id.generate );
+            mTextEdit = (EditText) findViewById( R.id.edit_text );
+            mGenerate = (Button) findViewById( R.id.generate );
             mGenerate.setOnClickListener( this );
-            mImageView = findViewById( R.id.imageView );
-            mDecode = findViewById( R.id.decode );
+            mImageView = (ImageView) findViewById( R.id.imageView );
+            mDecode = (Button) findViewById( R.id.decode );
             mDecode.setOnClickListener( this );
-            mTextView = findViewById( R.id.textView );
+            mTextView = (TextView) findViewById( R.id.textView );
       }
 
       @Override
@@ -54,13 +54,15 @@ public class GenerateQRCodeActivity extends AppCompatActivity implements OnClick
             switch( v.getId() ) {
                   case R.id.generate:
                         String text = mTextEdit.getText().toString();
-                        mQrCode = ZXingManager.createQRCode( text );
-                        mImageView.setImageBitmap( mQrCode );
+                        mPdf417 = ZXingManager.createPdf417( text, 500,200 );
+                        mImageView.setImageBitmap( mPdf417 );
                         break;
                   case R.id.decode:
-                        if( mQrCode != null ) {
-                              Result result = ZXingManager.decodeQRCode( mQrCode );
-                              mTextView.setText( result.getText() );
+                        if( mPdf417 != null ) {
+                              Result result = ZXingManager.decodePdf417( mPdf417 );
+                              if( result != null ) {
+                                    mTextView.setText( result.getText() );
+                              }
                         }
                         break;
                   default:

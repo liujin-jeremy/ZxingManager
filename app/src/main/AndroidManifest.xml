@@ -11,6 +11,10 @@
           android:supportsRtl="true"
           android:theme="@style/AppTheme"
           tools:ignore="GoogleAppIndexingWarning">
+            <activity android:name=".GenerateAztecActivity">
+            </activity>
+            <activity android:name=".SimpleAztecActivity">
+            </activity>
             <activity android:name=".GenerateDataMatrixActivity">
             </activity>
             <activity android:name=".SimpleDataMatrixActivity">

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
       private Button mGenerateCode128;
       private Button mDecodeDataMatrix;
       private Button mGenerateDataMatrix;
+      private Button mDecodeAztec;
+      private Button mGenerateAztec;
 
       @Override
       protected void onCreate ( Bundle savedInstanceState ) {
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             mDecodeDataMatrix.setOnClickListener( this );
             mGenerateDataMatrix = findViewById( R.id.generateDataMatrix );
             mGenerateDataMatrix.setOnClickListener( this );
+            mDecodeAztec = findViewById( R.id.decodeAztec );
+            mDecodeAztec.setOnClickListener( this );
+            mGenerateAztec = findViewById( R.id.generateAztec );
+            mGenerateAztec.setOnClickListener( this );
       }
 
       @Override
@@ -72,6 +78,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         break;
                   case R.id.generateDataMatrix:
                         GenerateDataMatrixActivity.start( this );
+                        break;
+                  case R.id.decodeAztec:
+                        SimpleAztecActivity.start( this );
+                        break;
+                  case R.id.generateAztec:
+                        GenerateAztecActivity.start( this );
                         break;
                   default:
                         break;

@@ -544,19 +544,18 @@ public class ZXingManager {
        * 创建aztec码
        *
        * @param content 内容
-       * @param width 宽度
-       * @param height 高度
+       * @param size 尺寸
        *
        * @return 图片
        */
       @RequiresApi(api = VERSION_CODES.KITKAT)
-      public static Bitmap createAztec ( String content, int width, int height ) {
+      public static Bitmap createAztec ( String content, int size ) {
 
             try {
-                  BitMatrix bitMatrix = new AztecWriter().encode( content, BarcodeFormat.DATA_MATRIX, width, height );
+                  BitMatrix bitMatrix = new AztecWriter().encode( content, BarcodeFormat.AZTEC, size, size );
 
-                  height = bitMatrix.getHeight();
-                  width = bitMatrix.getWidth();
+                  int height = bitMatrix.getHeight();
+                  int width = bitMatrix.getWidth();
 
                   int[] pixels = new int[ width * height ];
                   for( int y = 0; y < height; y++ ) {
@@ -588,17 +587,16 @@ public class ZXingManager {
        * 创建aztec码
        *
        * @param content 内容
-       * @param width 宽度
-       * @param height 高度
+       * @param size 尺寸
        * @param charset 编码集
-       * @param error_correction 纠错级别(0~100)
+       * @param error_correction 纠错级别(0~90)
        * @param aztec_layers 层数
        *
        * @return 图片
        */
       @RequiresApi(api = VERSION_CODES.KITKAT)
       public static Bitmap createAztec (
-          String content, int width, int height, String charset, int error_correction, int aztec_layers ) {
+          String content, int size, String charset, int error_correction, int aztec_layers ) {
 
             try {
                   ArrayMap<EncodeHintType, Object> hints = new ArrayMap<>();
@@ -606,10 +604,10 @@ public class ZXingManager {
                   hints.put( EncodeHintType.ERROR_CORRECTION, error_correction );
                   hints.put( EncodeHintType.AZTEC_LAYERS, aztec_layers );
 
-                  BitMatrix bitMatrix = new AztecWriter().encode( content, BarcodeFormat.DATA_MATRIX, width, height, hints );
+                  BitMatrix bitMatrix = new AztecWriter().encode( content, BarcodeFormat.DATA_MATRIX, size, size, hints );
 
-                  height = bitMatrix.getHeight();
-                  width = bitMatrix.getWidth();
+                  int height = bitMatrix.getHeight();
+                  int width = bitMatrix.getWidth();
 
                   int[] pixels = new int[ width * height ];
                   for( int y = 0; y < height; y++ ) {

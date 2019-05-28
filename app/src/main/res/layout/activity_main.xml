@@ -47,4 +47,24 @@
           app:layout_constraintStart_toEndOf="@+id/simplePdf417"
           app:layout_constraintTop_toBottomOf="@+id/generateQRCode"/>
 
+      <Button
+          android:id="@+id/decodeOneD"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginStart="8dp"
+          android:text="解析条形码"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/simplePdf417"/>
+
+      <Button
+          android:id="@+id/generateCode128"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginStart="8dp"
+          android:text="生成条形码"
+          app:layout_constraintStart_toEndOf="@+id/decodeOneD"
+          app:layout_constraintTop_toBottomOf="@+id/generatePdf417"/>
+
 </android.support.constraint.ConstraintLayout>

@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,9 +14,7 @@ import android.widget.TextView;
 import com.google.zxing.Result;
 import tech.jeremy.zxing.ZXingManager;
 
-public class SimplePdf417Activity extends AppCompatActivity implements OnClickListener {
-
-      private static final String TAG = SimplePdf417Activity.class.getSimpleName();
+public class SimpleOneDActivity extends AppCompatActivity implements OnClickListener {
 
       private ImageView mImageView;
       private Button    mDecode;
@@ -25,7 +22,7 @@ public class SimplePdf417Activity extends AppCompatActivity implements OnClickLi
 
       public static void start ( Context context ) {
 
-            Intent starter = new Intent( context, SimplePdf417Activity.class );
+            Intent starter = new Intent( context, SimpleOneDActivity.class );
             context.startActivity( starter );
       }
 
@@ -33,7 +30,7 @@ public class SimplePdf417Activity extends AppCompatActivity implements OnClickLi
       protected void onCreate ( Bundle savedInstanceState ) {
 
             super.onCreate( savedInstanceState );
-            setContentView( R.layout.activity_simple_pdf417 );
+            setContentView( R.layout.activity_simple_one_d );
             initView();
       }
 
@@ -50,10 +47,13 @@ public class SimplePdf417Activity extends AppCompatActivity implements OnClickLi
 
             switch( v.getId() ) {
                   case R.id.decode:
-                        Bitmap bitmap = BitmapFactory.decodeResource( getResources(), R.drawable.a2 );
-                        Result result = ZXingManager.decodePdf417( bitmap );
-                        Log.i( TAG, "onClick: " + result.getText() );
-                        mTextView.setText( result.getText() );
+                        Bitmap bitmap = BitmapFactory.decodeResource( getResources(), R.drawable.a3 );
+                        Result result = ZXingManager.decodeOneD( bitmap );
+                        if( result != null ) {
+                              mTextView.setText( result.getText() );
+                        } else {
+                              mTextView.setText( "解析失败" );
+                        }
                         break;
                   default:
                         break;

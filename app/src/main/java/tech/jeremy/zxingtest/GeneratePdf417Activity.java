@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -54,8 +55,10 @@ public class GeneratePdf417Activity extends AppCompatActivity implements OnClick
             switch( v.getId() ) {
                   case R.id.generate:
                         String text = mTextEdit.getText().toString();
-                        mPdf417 = ZXingManager.createPdf417( text, 500,200 );
-                        mImageView.setImageBitmap( mPdf417 );
+                        if( !TextUtils.isEmpty( text ) ) {
+                              mPdf417 = ZXingManager.createPdf417( text, 500, 200 );
+                              mImageView.setImageBitmap( mPdf417 );
+                        }
                         break;
                   case R.id.decode:
                         if( mPdf417 != null ) {

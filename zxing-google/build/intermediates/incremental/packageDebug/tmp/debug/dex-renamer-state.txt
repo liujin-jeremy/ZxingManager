@@ -1,4 +1,0 @@
-#Mon May 27 16:12:36 CST 2019
-base.0=E\:\\_AndroidTest\\ZXingTest\\zxing-google\\build\\intermediates\\dex\\debug\\mergeDexDebug\\out
-path.0=classes.dex
-renamed.0=classes.dex

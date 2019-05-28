@@ -15,7 +15,7 @@
           android:layout_marginStart="8dp"
           android:layout_marginEnd="8dp"
           android:maxLines="24"
-          android:text="曾经沧海难为水,除却巫山不是云.取次花丛懒回顾,半缘修道半缘君."
+          android:text="HelloWorld"
           android:textSize="12sp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"

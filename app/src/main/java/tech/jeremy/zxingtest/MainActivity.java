@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
       private Button mGeneratePdf417;
       private Button mDecodeOneD;
       private Button mGenerateCode128;
+      private Button mDecodeDataMatrix;
+      private Button mGenerateDataMatrix;
 
       @Override
       protected void onCreate ( Bundle savedInstanceState ) {
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             mDecodeOneD.setOnClickListener( this );
             mGenerateCode128 = findViewById( R.id.generateCode128 );
             mGenerateCode128.setOnClickListener( this );
+            mDecodeDataMatrix = findViewById( R.id.decodeDataMatrix );
+            mDecodeDataMatrix.setOnClickListener( this );
+            mGenerateDataMatrix = findViewById( R.id.generateDataMatrix );
+            mGenerateDataMatrix.setOnClickListener( this );
       }
 
       @Override
@@ -60,6 +66,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                         break;
                   case R.id.generateCode128:
                         GenerateCode128Activity.start( this );
+                        break;
+                  case R.id.decodeDataMatrix:
+                        SimpleDataMatrixActivity.start( this );
+                        break;
+                  case R.id.generateDataMatrix:
+                        GenerateDataMatrixActivity.start( this );
                         break;
                   default:
                         break;

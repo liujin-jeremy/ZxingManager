@@ -66,5 +66,23 @@
           android:text="生成条形码"
           app:layout_constraintStart_toEndOf="@+id/decodeOneD"
           app:layout_constraintTop_toBottomOf="@+id/generatePdf417"/>
+      <Button
+          android:id="@+id/decodeDataMatrix"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginStart="8dp"
+          android:text="解析DataMatrix"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/decodeOneD"/>
+      <Button
+          android:id="@+id/generateDataMatrix"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:layout_marginStart="8dp"
+          android:text="生成DataMatrix"
+          app:layout_constraintStart_toEndOf="@+id/decodeDataMatrix"
+          app:layout_constraintTop_toBottomOf="@+id/generateCode128"/>
 
 </android.support.constraint.ConstraintLayout>

@@ -419,40 +419,33 @@ public class ZXingManager {
       }
 
       /**
-       * @param content 内容
-       * @param width 宽度
-       * @param height 高度
+       * @param bitmap 图片
+       * @param pure_barcode true:图像是条形码的纯单色图像
        *
-       * @return 图片
+       * @return 解析结果
        */
-      public static Bitmap createDataMatrix ( String content, int width, int height ) {
+      public static Result decodeDataMatrix ( Bitmap bitmap, boolean pure_barcode ) {
 
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            int[] data = new int[ width * height ];
+            bitmap.getPixels( data, 0, width, 0, 0, width, height );
+
+            LuminanceSource source = new RGBLuminanceSource( width, height, data );
+            Binarizer binarizer = new HybridBinarizer( source );
+            BinaryBitmap binaryBitmap = new BinaryBitmap( binarizer );
+
+            ArrayMap<DecodeHintType, Object> hints = new ArrayMap<>();
+            hints.put( DecodeHintType.PURE_BARCODE, pure_barcode );
+
+            DataMatrixReader reader = new DataMatrixReader();
             try {
-                  BitMatrix bitMatrix = new DataMatrixWriter().encode( content, BarcodeFormat.DATA_MATRIX, width, height );
-
-                  height = bitMatrix.getHeight();
-                  width = bitMatrix.getWidth();
-
-                  int[] pixels = new int[ width * height ];
-                  for( int y = 0; y < height; y++ ) {
-                        for( int x = 0; x < width; x++ ) {
-                              if( bitMatrix.get( x, y ) ) {
-                                    pixels[ y * width + x ] = Color.BLACK;
-                              } else {
-                                    pixels[ y * width + x ] = Color.WHITE;
-                              }
-                        }
-                  }
-
-                  Bitmap bitmap = Bitmap.createBitmap(
-                      width,
-                      height,
-                      Config.RGB_565
-                  );
-
-                  bitmap.setPixels( pixels, 0, width, 0, 0, width, height );
-                  return bitmap;
-            } catch(Exception e) {
+                  return reader.decode( binaryBitmap, hints );
+            } catch(NotFoundException e) {
+                  e.printStackTrace();
+            } catch(FormatException e) {
+                  e.printStackTrace();
+            } catch(ChecksumException e) {
                   e.printStackTrace();
             }
 
@@ -461,24 +454,34 @@ public class ZXingManager {
 
       /**
        * @param content 内容
-       * @param width 宽度
-       * @param height 高度
+       * @param size 尺寸
+       *
+       * @return 图片
+       */
+      public static Bitmap createDataMatrix ( String content, int size ) {
+
+            return createDataMatrix( content, size, SymbolShapeHint.FORCE_SQUARE );
+      }
+
+      /**
+       * @param content 内容
+       * @param size 尺寸
        * @param data_matrix_shape 形状
        *
        * @return 图片
        */
       public static Bitmap createDataMatrix (
           String content,
-          int width, int height,
+          int size,
           SymbolShapeHint data_matrix_shape ) {
 
             try {
                   ArrayMap<EncodeHintType, Object> hints = new ArrayMap<>( 1 );
                   hints.put( EncodeHintType.DATA_MATRIX_SHAPE, data_matrix_shape );
-                  BitMatrix bitMatrix = new DataMatrixWriter().encode( content, BarcodeFormat.DATA_MATRIX, width, height, hints );
+                  BitMatrix bitMatrix = new DataMatrixWriter().encode( content, BarcodeFormat.DATA_MATRIX, size, size, hints );
 
-                  height = bitMatrix.getHeight();
-                  width = bitMatrix.getWidth();
+                  int height = bitMatrix.getHeight();
+                  int width = bitMatrix.getWidth();
 
                   int[] pixels = new int[ width * height ];
                   for( int y = 0; y < height; y++ ) {

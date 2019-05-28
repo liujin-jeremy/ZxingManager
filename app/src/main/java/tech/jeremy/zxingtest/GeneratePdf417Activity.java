@@ -22,7 +22,7 @@ public class GeneratePdf417Activity extends AppCompatActivity implements OnClick
       private ImageView mImageView;
       private Button    mDecode;
       private TextView  mTextView;
-      private Bitmap    mPdf417;
+      private Bitmap    mBitmap;
 
       public static void start ( Context context ) {
 
@@ -56,13 +56,13 @@ public class GeneratePdf417Activity extends AppCompatActivity implements OnClick
                   case R.id.generate:
                         String text = mTextEdit.getText().toString();
                         if( !TextUtils.isEmpty( text ) ) {
-                              mPdf417 = ZXingManager.createPdf417( text, 500, 200 );
-                              mImageView.setImageBitmap( mPdf417 );
+                              mBitmap = ZXingManager.createPdf417( text, 500, 200 );
+                              mImageView.setImageBitmap( mBitmap );
                         }
                         break;
                   case R.id.decode:
-                        if( mPdf417 != null ) {
-                              Result result = ZXingManager.decodePdf417( mPdf417 );
+                        if( mBitmap != null ) {
+                              Result result = ZXingManager.decodePdf417( mBitmap );
                               if( result != null ) {
                                     mTextView.setText( result.getText() );
                               }

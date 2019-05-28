@@ -12,17 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.google.zxing.Binarizer;
-import com.google.zxing.BinaryBitmap;
-import com.google.zxing.ChecksumException;
-import com.google.zxing.FormatException;
-import com.google.zxing.LuminanceSource;
-import com.google.zxing.NotFoundException;
-import com.google.zxing.RGBLuminanceSource;
 import com.google.zxing.Result;
-import com.google.zxing.common.HybridBinarizer;
-import com.google.zxing.qrcode.QRCodeReader;
+import tech.jeremy.zxing.ZXingManager;
 
 public class SimpleQRCodeActivity extends AppCompatActivity implements OnClickListener {
 
@@ -79,26 +70,13 @@ public class SimpleQRCodeActivity extends AppCompatActivity implements OnClickLi
 
             switch( v.getId() ) {
                   case R.id.button:
-                        QRCodeReader reader = new QRCodeReader();
-                        LuminanceSource source = new RGBLuminanceSource( mWidth, mHeight, mData );
-                        Binarizer binarizer = new HybridBinarizer( source );
-                        BinaryBitmap binaryBitmap = new BinaryBitmap( binarizer );
-                        try {
-                              long start = System.currentTimeMillis();
-                              Result decode = reader.decode( binaryBitmap );
-                              long finish = System.currentTimeMillis();
-                              long result = finish - start;
-
-                              Log.i( TAG, "onClick: 解析成功" + decode.getText() );
-                              mTextView.setText( decode.getText() );
-
-                              Toast.makeText( this, "耗时" + result, Toast.LENGTH_SHORT ).show();
-                        } catch(NotFoundException e) {
-                              e.printStackTrace();
-                        } catch(ChecksumException e) {
-                              e.printStackTrace();
-                        } catch(FormatException e) {
-                              e.printStackTrace();
+                        Bitmap bitmap = BitmapFactory.decodeResource( getResources(), R.drawable.a1 );
+                        Result result = ZXingManager.decodeQRCode( bitmap );
+                        if( result != null ) {
+                              String text = result.getText();
+                              mTextView.setText( text );
+                        } else {
+                              mTextView.setText( "解析失败" );
                         }
                         break;
                   default:

@@ -20,7 +20,7 @@ public class GenerateQRCodeActivity extends AppCompatActivity implements OnClick
       private Button    mGenerate;
       private ImageView mImageView;
       private Button    mDecode;
-      private Bitmap    mQrCode;
+      private Bitmap    mBitmap;
       private TextView  mTextView;
 
       public static void start ( Context context ) {
@@ -54,12 +54,12 @@ public class GenerateQRCodeActivity extends AppCompatActivity implements OnClick
             switch( v.getId() ) {
                   case R.id.generate:
                         String text = mTextEdit.getText().toString();
-                        mQrCode = ZXingManager.createQRCode( text );
-                        mImageView.setImageBitmap( mQrCode );
+                        mBitmap = ZXingManager.createQRCode( text );
+                        mImageView.setImageBitmap( mBitmap );
                         break;
                   case R.id.decode:
-                        if( mQrCode != null ) {
-                              Result result = ZXingManager.decodeQRCode( mQrCode );
+                        if( mBitmap != null ) {
+                              Result result = ZXingManager.decodeQRCode( mBitmap );
                               mTextView.setText( result.getText() );
                         }
                         break;
